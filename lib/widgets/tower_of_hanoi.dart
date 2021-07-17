@@ -12,14 +12,14 @@ class _TowerOfHanoiState extends State<TowerOfHanoi>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation animation;
-  late DisksBrain disksBrain;
+  // late DisksBrain disksBrain;
   var status = Status.starting;
   String errorMsg = '';
   String infoMsg = '';
   int? fromRodIndex;
 
   bool canDecrement() {
-    return status == Status.starting && disksBrain.diskCount > 1;
+    return status == Status.starting && disksBrain.disks.length > 1;
   }
 
   void decrementDisks() {
@@ -29,7 +29,7 @@ class _TowerOfHanoiState extends State<TowerOfHanoi>
   }
 
   bool canIncrement() {
-    return status == Status.starting && disksBrain.diskCount < 9;
+    return status == Status.starting && disksBrain.disks.length < 9;
   }
 
   void incrementDisks() {
@@ -56,8 +56,8 @@ class _TowerOfHanoiState extends State<TowerOfHanoi>
   Future solve() async {
     status = Status.solving;
     infoMsg = kSolving;
-    disksBrain.reset();
-    await moveDisks(disksBrain.diskCount, 0, 2);
+    disksBrain.reset(disksBrain.disks.length);
+    await moveDisks(disksBrain.disks.length, 0, 2);
     status = Status.solved;
     infoMsg = kSolved;
   }
@@ -123,7 +123,7 @@ class _TowerOfHanoiState extends State<TowerOfHanoi>
   void initState() {
     super.initState();
 
-    disksBrain = DisksBrain(diskCount: 4);
+    disksBrain = DisksBrain();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),

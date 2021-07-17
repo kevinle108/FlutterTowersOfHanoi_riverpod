@@ -3,6 +3,7 @@ import 'rod_widget.dart';
 import 'disk_widget.dart';
 import '../constants_enums.dart';
 import '../models/disks_brain.dart';
+import 'package:towers_of_hanoi/providers.dart';
 
 class AnimationArea extends StatelessWidget {
   final Status status;
