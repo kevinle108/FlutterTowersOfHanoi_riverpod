@@ -33,11 +33,17 @@ class DisksState extends StateNotifier<List<Disk>> {
   }
 
   void incrementDisks() {
-    reset(state.length+1);
+    if (state.length < 8) {
+      reset(state.length+1);
+    }
+    state = state;
   }
 
   void decrementDisks() {
-    reset(state.length-1);
+    if (state.length > 1) {
+      reset(state.length-1);
+    }
+    state = state;
   }
 
   bool moveTopDisk(int fromRodIndex, int toRodIndex) {
